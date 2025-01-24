@@ -19,17 +19,17 @@ function PostsList() {
     }
 
     function hideModalHandler(){
-        setModalIsVisible(false)
+        setModalIsVisible(false);
     }
 
     return (
         <div>
-            <Modal onClose={hideModalHandler}>
+            {modalIsVisible && (<Modal onClose={hideModalHandler}>
                 <NewPost
                     onBodyChange={changeBodyHandler}
                     onAuthorChange={authorChangeHandler}
                 />
-            </Modal>
+            </Modal>)}
             <ul className={classes.posts}>
                 <li>
                     <Post
