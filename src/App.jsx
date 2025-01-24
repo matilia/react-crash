@@ -1,5 +1,10 @@
+import PostsList from "./components/PostsList.jsx";
+
 function App() {
-  return <h1>Hello World!</h1>;
+  return <>
+    <PostsList/>
+  </>
+
 }
 
 export default App;
