@@ -1,45 +1,31 @@
 import Post from "./Post";
 import classes from './PostsList.module.css';
 import NewPost from "./NewPost";
-import {useState} from "react";
 import Modal from "./Modal.jsx";
+import {useState} from "react";
 
 
-function PostsList() {
-    const [enteredBody, setEnteredBody] = useState('');
-    const [enteredAuthor, setEnteredAuthor] = useState('');
-    const [modalIsVisible, setModalIsVisible] = useState(true);
+function PostsList({isPosting, onStopPosting}) {
+    const [posts, setPosts] = useState([]);
 
-    function changeBodyHandler(event) {
-        setEnteredBody(event.target.value);
-    }
-
-    function authorChangeHandler(event) {
-        setEnteredAuthor(event.target.value);
-    }
-
-    function hideModalHandler(){
-        setModalIsVisible(false);
+    function addPostHandler(postData) {
+        setPosts((existingPosts) => [postData, ...existingPosts]);
     }
 
     return (
         <div>
-            {modalIsVisible && (<Modal onClose={hideModalHandler}>
+            {isPosting && (<Modal onClose={onStopPosting}>
                 <NewPost
-                    onBodyChange={changeBodyHandler}
-                    onAuthorChange={authorChangeHandler}
+                    onCancel={onStopPosting}
+                    onAddPost={addPostHandler}
                 />
             </Modal>)}
             <ul className={classes.posts}>
-                <li>
-                    <Post
-                        author={enteredAuthor}
-                        text={enteredBody}
-                    />
-                </li>
-                <li>
-                    <Post author="Maximus" text="Nextjs is a great tool to build full-stack React Applications"/>
-                </li>
+                {posts.map((post, index) => (
+                    <li key={index}>
+                        <Post author={post.author} body={post.body}/>
+                    </li>
+                ))}
             </ul>
         </div>
     );
