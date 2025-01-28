@@ -9,6 +9,7 @@ function PostsList({isPosting, onStopPosting}) {
     const [posts, setPosts] = useState([]);
 
     function addPostHandler(postData) {
+        // adding more post to the existing ones
         setPosts((existingPosts) => [postData, ...existingPosts]);
     }
 
