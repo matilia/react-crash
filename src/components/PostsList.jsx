@@ -1,6 +1,6 @@
 import Post from "./Post";
 import classes from './PostsList.module.css';
-import NewPost from "./NewPost";
+import NewPost from "../routes/NewPost.jsx";
 import Modal from "./Modal.jsx";
 import {useEffect, useState} from "react";
 
@@ -8,7 +8,6 @@ import {useEffect, useState} from "react";
 function PostsList({isPosting, onStopPosting}) {
     const [posts, setPosts] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
-
 
     useEffect(() => {
         setIsFetching(true);
